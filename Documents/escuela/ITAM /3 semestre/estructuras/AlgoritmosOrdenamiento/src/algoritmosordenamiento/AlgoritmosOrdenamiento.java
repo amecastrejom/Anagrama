@@ -97,8 +97,47 @@ public class AlgoritmosOrdenamiento {
 			System.out.println();
 	}
     
-    public static void merge(){
+   
+   public static void mergeSort(int[] datos, int min, int max) {
+        int pivote;
+
+        if (min >= max) {
+            return;
+        }
         
+        pivote = (min + max) / 2;
+        mergeSort(datos, min, pivote);
+        mergeSort(datos, pivote + 1, max);
+
+        int i=min, j=pivote+1, k=0;
+        int[] temp= new int[max-min+1];
+        
+        while(i<=pivote && j<=max){
+            if(datos[i]<datos[j]){
+                temp[k]=datos[i];
+                i++;
+            } else {
+                temp[k]=datos[j];
+                j++;
+            }
+            k++;
+        }
+        if(i<=pivote){
+            while(i<=pivote){
+              temp[k]=datos[i];
+              k++;
+              i++;
+            }
+        } else {
+            while(j<=max){
+                temp[k]=datos[j];
+                k++;
+                j++;
+            }
+        }
+        for (int n=0;n<temp.length;n++){
+            datos[min+n]=temp[n];
+        }
     }
     
     
@@ -124,11 +163,19 @@ public class AlgoritmosOrdenamiento {
         bubbleSort(datos2);
         imprimeArreglo(datos2);
         
-        int[] datos4={10,9,12,13,6,5,4,8,2,7};//{20,3,2,19,94,85,12,56,73,-6};
+        int[] datos4={10,9,12,13,6,5,4,8,2,7};
         imprimeArreglo(datos4);
 
        quickSort(datos4,0,datos4.length-1);
         imprimeArreglo(datos4);
+        
+        int[] datos5={10,9,12,13,6,5,4,8,2,7};
+        imprimeArreglo(datos5);
+        
+        mergeSort(datos5, 0, datos.length-1);
+        imprimeArreglo(datos5);
+
+       
     }
     
 }
